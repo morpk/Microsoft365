@@ -1,3 +1,8 @@
+# The Following Script will connect to the following M365 Services and install Modules if not found
+# Azure AD (MSOL)
+# Exchange Online
+# SharePoint Online
+# Teams 
 
 Param
 (
