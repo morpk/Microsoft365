@@ -16,7 +16,7 @@ Param
     [switch]$UserMBOnly,
     [string]$MBNamesFile,
     [string]$UserName,
-    [string]$Password
+    [SecureString]$Password
 )
 
 Function Get_MailboxSize
