@@ -1,0 +1,3 @@
+#The Following Commands will read a TXT File in the below location and convert to Shared Mailboxes
+
+ForEach ($user in (get-content "C:\Mailboxes\mailboxes.txt")) { Get-Mailbox -identity $user | set-mailbox -type “Shared” } 
