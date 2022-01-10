@@ -38,20 +38,20 @@ Function Get_MailboxSize
 Function main()
 {
  #Check for EXO v2 module inatallation
- #$Module = Get-Module ExchangeOnlineManagement -ListAvailable
- #if($Module.count -eq 0) 
- #{ 
- # Write-Host Exchange Online PowerShell V2 module is not available  -ForegroundColor yellow  
- # $Confirm= Read-Host Are you sure you want to install module? [Y] Yes [N] No 
- # if($Confirm -match "[yY]") 
-  #{ 
-  # Write-host "Installing Exchange Online PowerShell module"
-  # Install-Module ExchangeOnlineManagement -Repository PSGallery -AllowClobber -Force
- # } 
-  #else 
-  #{ 
- #  Write-Host EXO V2 module is required to connect Exchange Online.Please install module using Install-Module ExchangeOnlineManagement cmdlet. 
- #  Exit
+ $Module = Get-Module ExchangeOnlineManagement -ListAvailable
+ if($Module.count -eq 0) 
+ { 
+  Write-Host Exchange Online PowerShell V2 module is not available  -ForegroundColor yellow  
+  $Confirm= Read-Host Are you sure you want to install module? [Y] Yes [N] No 
+  if($Confirm -match "[yY]") 
+  { 
+   Write-host "Installing Exchange Online PowerShell module"
+   Install-Module ExchangeOnlineManagement -Repository PSGallery -AllowClobber -Force
+  } 
+  else 
+  { 
+   Write-Host EXO V2 module is required to connect Exchange Online.Please install module using Install-Module ExchangeOnlineManagement cmdlet. 
+   Exit
   }
  } 
 
@@ -62,20 +62,20 @@ Function main()
  }
 
  #Authentication using non-MFA
- #else
-# {
+ else
+ {
   #Storing credential in script for scheduling purpose/ Passing credential as parameter
-#  if(($UserName -ne "") -and ($Password -ne ""))
- # {
- #  $SecuredPassword = ConvertTo-SecureString -AsPlainText $Password -Force
- #  $Credential  = New-Object System.Management.Automation.PSCredential $UserName,$SecuredPassword
- # }
- # else
- # {
- #  $Credential=Get-Credential -Credential $null
- # }
- # Connect-ExchangeOnline -Credential $Credential
-# }
+  if(($UserName -ne "") -and ($Password -ne ""))
+  {
+   $SecuredPassword = ConvertTo-SecureString -AsPlainText $Password -Force
+   $Credential  = New-Object System.Management.Automation.PSCredential $UserName,$SecuredPassword
+  }
+  else
+  {
+   $Credential=Get-Credential -Credential $null
+  }
+  Connect-ExchangeOnline -Credential $Credential
+ }
 
  #Output file declaration 
  $ExportCSV=".\MailboxSizeReport_$((Get-Date -format yyyy-MMM-dd-ddd` hh-mm` tt).ToString()).csv" 
@@ -174,7 +174,7 @@ Function main()
   }
  }
  #Disconnect Exchange Online session
-Get-PSSession | Remove-PSSession
+ Disconnect-ExchangeOnline -Confirm:$false | Out-Null
 }
  . main
 
