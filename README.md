@@ -1,2 +1,2 @@
 # Microsoft365
-A Collection of M365 PowerShell Scripts
+A Collection of Microsoft 365 PowerShell Scripts i find usefull 
