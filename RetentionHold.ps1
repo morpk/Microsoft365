@@ -16,5 +16,3 @@ get-mailbox "MailboxName" | Select RetentionHoldEnabled
 #This forces the Rentention Policy to start running 
 Start-ManagedFolderAssistant -Identity "MailboxName"
 
-#
-
