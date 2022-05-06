@@ -14,7 +14,7 @@ ELSE
 # Download the installer
 
 $source = "https://docsolmspapps.blob.core.windows.net/general/Teams_windows_x64.msi"
-$destination = "$workdir\Kyronn.exe"
+$destination = "$workdir\Teams_windows_x64.msi"
 
 # Check if Invoke-Webrequest exists otherwise execute WebClient
 
